@@ -1,5 +1,6 @@
 package com.hida.imms.workorder
 
+import com.hida.imms.ActionInfo
 import grails.transaction.Transactional
 
 /**
@@ -9,20 +10,20 @@ import grails.transaction.Transactional
 class ManagerRejectedActionService implements WorkOrderStateAction {
 
     @Override
-    WorkOrderState next(String workflowId, WorkOrder item) {
+    WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {
         item.save(failOnError: true)
         return WorkOrderState.ENGINEER_DRAFT
     }
 
     @Override
-    WorkOrderState save(String workflowId, WorkOrder item) {
+    WorkOrderState save(WorkOrder item, ActionInfo actionInfo) {
         item.save(failOnError: true)
         WorkOrderState.MANAGER_REJECTED
     }
 
     @Override
-    WorkOrderState back(String workflowId, WorkOrder item) {
-        return WorkOrderState.ENGINEER_DRAFT.back(workflowId, item)
+    WorkOrderState back(WorkOrder item, ActionInfo actionInfo) {
+        return WorkOrderState.ENGINEER_DRAFT.back(item, actionInfo)
     }
 }
 

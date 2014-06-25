@@ -1,5 +1,6 @@
 package com.hida.imms.workorder
 
+import com.hida.imms.ActionInfo
 import com.hida.imms.UnsupportedStatusTransitionException
 import grails.transaction.Transactional
 
@@ -10,19 +11,20 @@ import grails.transaction.Transactional
 @Transactional
 class EngineerDraftActionService implements WorkOrderStateAction {
     @Override
-    WorkOrderState next(String workflowId, WorkOrder item) {
+    WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {
         boolean approved = true
         approved ? WorkOrderState.MANAGER_APPROVED : WorkOrderState.MANAGER_REJECTED
     }
 
     @Override
-    WorkOrderState save(String workflowId, WorkOrder item) {
+    WorkOrderState save(WorkOrder item, ActionInfo actionInfo) {
         throw new UnsupportedStatusTransitionException()
     }
 
     @Override
-    WorkOrderState back(String workflowId, WorkOrder item) {
-        return WorkOrderState.PLANNER_DRAFT.back(workflowId, item)
+    WorkOrderState back(WorkOrder item, ActionInfo actionInfo) {
+        //rollback what's done in WorkOrderState.PLANNER_DRAFT.next
+        return WorkOrderState.PLANNER_DRAFT.back(item, actionInfo)
     }
 }
 

@@ -1,6 +1,8 @@
 package com.hida.imms.workorder
 
+import com.hida.imms.ActionInfo
 import grails.transaction.Transactional
+import org.joda.time.LocalDateTime
 
 /**
  * Planner see this either from auto-generated or manual creation.
@@ -9,22 +11,27 @@ import grails.transaction.Transactional
 class NewActionService implements WorkOrderStateAction {
 
     @Override
-    WorkOrderState next(String workflowId, WorkOrder item) {
+    WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {
         item.save(failOnError: true)
         return WorkOrderState.PLANNER_DRAFT
     }
 
     @Override
-    WorkOrderState save(String workflowId, WorkOrder item) {
+    WorkOrderState save(WorkOrder item, ActionInfo actionInfo) {
         item.save(failOnError: true)
         return WorkOrderState.NEW
     }
 
     @Override
-    WorkOrderState back(String workflowId, WorkOrder item) {
+    @Transactional
+    WorkOrderState back(WorkOrder item, ActionInfo actionInfo) {
         // delete workflow record
         // delete work order
         // create work cancellation record and the reason.
+        new WorkOrderCancellation(workOrderId: item.id, workOrderNm: item.workOrderNm, workOrderState: item.state,
+                cancelledBy: actionInfo.userId, cancelledAt: actionInfo.time ?: LocalDateTime.now(), reasons: actionInfo.reason).
+        save(failOnError: true)
+
         item.delete()
         return WorkOrderState.WORK_CANCELLED
     }
