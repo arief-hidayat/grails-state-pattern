@@ -1,6 +1,7 @@
 package com.hida.imms.workorder
 
 import com.hida.imms.ActionInfo
+import com.hida.imms.StateAction
 import grails.transaction.Transactional
 import org.joda.time.LocalDateTime
 
@@ -8,7 +9,7 @@ import org.joda.time.LocalDateTime
  * Planner see this either from auto-generated or manual creation.
  */
 @Transactional
-class NewActionService implements WorkOrderStateAction {
+class NewActionService implements StateAction<WorkOrder> {
 
     @Override
     WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {

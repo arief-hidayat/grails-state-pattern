@@ -1,6 +1,7 @@
 package com.hida.imms.workorder
 
 import com.hida.imms.ActionInfo
+import com.hida.imms.StateAction
 import com.hida.imms.UnsupportedStatusTransitionException
 import grails.transaction.Transactional
 
@@ -9,7 +10,7 @@ import grails.transaction.Transactional
  *
  */
 @Transactional
-class EngineerDraftActionService implements WorkOrderStateAction {
+class EngineerDraftActionService implements StateAction<WorkOrder> {
     @Override
     WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {
         boolean approved = true

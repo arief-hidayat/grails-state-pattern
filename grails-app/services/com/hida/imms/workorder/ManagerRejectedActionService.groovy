@@ -1,13 +1,14 @@
 package com.hida.imms.workorder
 
 import com.hida.imms.ActionInfo
+import com.hida.imms.StateAction
 import grails.transaction.Transactional
 
 /**
  * engineer to rework a rejected-work-order or cancel it.
  */
 @Transactional
-class ManagerRejectedActionService implements WorkOrderStateAction {
+class ManagerRejectedActionService implements StateAction<WorkOrder> {
 
     @Override
     WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {

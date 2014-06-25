@@ -1,6 +1,7 @@
 package com.hida.imms.workorder
 
 import com.hida.imms.ActionInfo
+import com.hida.imms.StateAction
 import com.hida.imms.UnsupportedStatusTransitionException
 import grails.transaction.Transactional
 
@@ -8,7 +9,7 @@ import grails.transaction.Transactional
  * time to return excessive parts (if any)
  */
 @Transactional
-class WorkCompletedActionService  implements WorkOrderStateAction {
+class WorkCompletedActionService  implements StateAction<WorkOrder> {
 
     @Override
     WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {

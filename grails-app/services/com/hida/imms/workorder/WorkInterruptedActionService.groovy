@@ -1,11 +1,12 @@
 package com.hida.imms.workorder
 
 import com.hida.imms.ActionInfo
+import com.hida.imms.StateAction
 import com.hida.imms.UnsupportedStatusTransitionException
 import grails.transaction.Transactional
 
 @Transactional
-class WorkInterruptedActionService implements WorkOrderStateAction {
+class WorkInterruptedActionService implements StateAction<WorkOrder> {
 
     @Override
     WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {

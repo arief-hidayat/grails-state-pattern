@@ -1,24 +1,25 @@
 package com.hida.imms.workorder
 
 import com.hida.imms.ActionInfo
+import com.hida.imms.StateAction
 import grails.util.Holders
 
 /**
  * Created by arief.hidayat on 24/06/2014.
  */
-enum WorkOrderState implements WorkOrderStateAction {
-    NEW ("NEW", "newActionService"),
-    PLANNER_DRAFT ("PLANNER_DRAFT", "plannerDraftActionService"),
-    ENGINEER_DRAFT ("ENGINEER_DRAFT", "engineerDraftActionService"),
-    MANAGER_APPROVED ("MANAGER_APPROVED", "managerApprovedActionService"),
-    MANAGER_REJECTED ("MANAGER_REJECTED", "managerRejectedActionService"),
-    INVENTORY_RESERVED ("INVENTORY_RESERVED", "inventoryReservedActionService"),
-    INVENTORY_RELEASED ("INVENTORY_RELEASED", "inventoryReleasedActionService"),
-    WORK_IN_PROGRESS ("WORK_IN_PROGRESS", "workInProgressActionService"),
-    WORK_INTERRUPTED ("WORK_INTERRUPTED", "workInterruptedActionService"),
-    WORK_COMPLETED ("WORK_COMPLETED", "workCompletedActionService"),
-    WORK_CLOSED  ("WORK_CLOSED", "workClosedActionService"),
-    WORK_CANCELLED  ("WORK_CANCELLED", "workCancelledActionService")
+enum WorkOrderState implements StateAction<WorkOrder> {
+    NEW                 ("NEW",                 "newActionService"),
+    PLANNER_DRAFT       ("PLANNER_DRAFT",       "plannerDraftActionService"),
+    ENGINEER_DRAFT      ("ENGINEER_DRAFT",      "engineerDraftActionService"),
+    MANAGER_APPROVED    ("MANAGER_APPROVED",    "managerApprovedActionService"),
+    MANAGER_REJECTED    ("MANAGER_REJECTED",    "managerRejectedActionService"),
+    INVENTORY_RESERVED  ("INVENTORY_RESERVED",  "inventoryReservedActionService"),
+    INVENTORY_RELEASED  ("INVENTORY_RELEASED",  "inventoryReleasedActionService"),
+    WORK_IN_PROGRESS    ("WORK_IN_PROGRESS",    "workInProgressActionService"),
+    WORK_INTERRUPTED    ("WORK_INTERRUPTED",    "workInterruptedActionService"),
+    WORK_COMPLETED      ("WORK_COMPLETED",      "workCompletedActionService"),
+    WORK_CLOSED         ("WORK_CLOSED",         "workClosedActionService"),
+    WORK_CANCELLED      ("WORK_CANCELLED",      "workCancelledActionService")
 
     public WorkOrderState(String name, String serviceName) {
         this.name = name; this.serviceName = serviceName
@@ -27,9 +28,9 @@ enum WorkOrderState implements WorkOrderStateAction {
     private final String name
     private final String serviceName
 
-    private WorkOrderStateAction _service
+    private StateAction _service
 
-    private WorkOrderStateAction getService() {
+    private StateAction getService() {
         if(!_service)
             _service = Holders.applicationContext.getBean(serviceName)
         _service

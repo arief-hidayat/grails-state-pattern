@@ -1,6 +1,7 @@
 package com.hida.imms.workorder
 
 import com.hida.imms.ActionInfo
+import com.hida.imms.StateAction
 import com.hida.imms.UnsupportedStatusTransitionException
 import grails.transaction.Transactional
 
@@ -8,7 +9,7 @@ import grails.transaction.Transactional
  * after manager approved, system tries to reserve
  */
 @Transactional
-class ManagerApprovedActionService implements WorkOrderStateAction {
+class ManagerApprovedActionService implements StateAction<WorkOrder> {
 
     @Override
     WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {

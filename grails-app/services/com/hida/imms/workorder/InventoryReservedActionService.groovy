@@ -1,14 +1,14 @@
 package com.hida.imms.workorder
 
 import com.hida.imms.ActionInfo
-import com.hida.imms.UnsupportedStatusTransitionException
+import com.hida.imms.StateAction
 import grails.transaction.Transactional
 
 /**
  *
  */
 @Transactional
-class InventoryReservedActionService implements WorkOrderStateAction {
+class InventoryReservedActionService implements StateAction<WorkOrder> {
     @Override
     WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {
         item.save(failOnError: true)

@@ -1,13 +1,14 @@
 package com.hida.imms.workorder
 
 import com.hida.imms.ActionInfo
+import com.hida.imms.StateAction
 import grails.transaction.Transactional
 
 /**
  * engineer in
  */
 @Transactional
-class WorkInProgressActionService implements WorkOrderStateAction {
+class WorkInProgressActionService implements StateAction<WorkOrder> {
 
     @Override
     WorkOrderState next(WorkOrder item, ActionInfo actionInfo) {
