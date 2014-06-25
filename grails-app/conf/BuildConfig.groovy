@@ -33,6 +33,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "https://maven.alfresco.com/nexus/content/groups/public/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -41,6 +42,9 @@ grails.project.dependency.resolution = {
 
     plugins {
         compile ":joda-time:1.4"
+
+        compile ":activiti:5.12.1"
+        compile ":spring-security-core:2.0-RC3"
         build(":release:3.0.1",
               ":rest-client-builder:1.0.3") {
             export = false
