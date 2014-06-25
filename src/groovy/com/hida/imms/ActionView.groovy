@@ -5,4 +5,5 @@ package com.hida.imms
  */
 class ActionView {
     String displayCode, url;
+    List<String> authorities = []
 }

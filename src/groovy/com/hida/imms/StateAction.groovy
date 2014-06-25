@@ -7,7 +7,7 @@ import com.hida.imms.workorder.WorkOrderState
  */
 interface StateAction<T> {
 //    List<ActionView> actionList(String workflowId, String userId) // list of action that can be performed by user on this state
-    WorkOrderState next(T item, ActionInfo actionInfo)
-    WorkOrderState save(T item, ActionInfo actionInfo)
-    WorkOrderState back(T item, ActionInfo actionInfo)
+    StateAction<T> next(T item, ActionInfo actionInfo)
+    StateAction<T> save(T item, ActionInfo actionInfo)
+    StateAction<T> back(T item, ActionInfo actionInfo)
 }
